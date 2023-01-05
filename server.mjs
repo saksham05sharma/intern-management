@@ -5,6 +5,7 @@ import { PORT } from "./config/index.mjs";
 
 import apiIndex from "./routes/index.mjs";
 import apiAuth from "./routes/auth.mjs";
+import apiUser from "./routes/user.mjs";
 import connect from "./db/index.mjs";
 
 import path, { dirname } from "path";
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api", apiIndex);
 app.use("/api/auth", apiAuth);
+app.use("/api/user", apiUser);
 
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === "production") {
