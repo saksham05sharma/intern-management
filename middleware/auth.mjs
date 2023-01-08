@@ -35,17 +35,28 @@ const isAdmin = async (req, res, next) => {
     }
 };
 
-const isStudent = async (req, res, next) => {
+const isIntern = async (req, res, next) => {
     try {
         let foundUser = await getUserById(req.user.id);
-        if (foundUser.role === USER_ROLES.STUDENT) next();
+        if (foundUser.role === USER_ROLES.USER) next();
         else
-            res.status(403).json({
+            return res.status(403).json({
                 message: "You are not authorized to access this route",
             });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Internal Server Errorasync" });
+    }
+};
+
+const isVerified = async (req, res, next) => {
+    try {
+        let foundUser = await getUserById(req.user.id);
+        if (foundUser.verified) next();
+        else return res.status(403).json({ message: "You are not verified" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
@@ -66,4 +77,4 @@ const verifyUserRole = (role) => async (req, res, next) => {
 };
 
 export default auth;
-export { isAdmin, isStudent, verifyUserRole };
+export { isAdmin, isIntern, verifyUserRole, isVerified };

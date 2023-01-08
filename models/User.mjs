@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
+		allowEdit: {
+			type: Boolean,
+			default: false,
+		}
 	},
 	{ timestamps: true }
 );
