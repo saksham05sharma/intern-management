@@ -2,3 +2,43 @@ button {
     all: unset;
     cursor: pointer;
 }
+
+.btn {
+    padding: 14px 24px;
+    border-radius: 6px;
+    margin: 4px;
+    font-size: 18px;
+    line-height: 120%;
+    transition: all var(--transition-time) ease-in-out;
+
+    background-color: var(--blue-700);
+    color: #fff;
+    border: 1px solid var(--blue-700);
+
+    &:hover {
+        background-color: var(--transparent);
+        color: var(--blue-700);
+    }
+
+    &-fill {
+        background-color: var(--blue-700);
+        color: #fff;
+        border: 1px solid var(--blue-700);
+
+        &:hover {
+            background-color: var(--transparent);
+            color: var(--blue-700);
+        }
+    }
+
+    &-outline {
+        background-color: var(--transparent);
+        color: var(--blue-700);
+        border: 1px solid var(--blue-700);
+
+        &:hover {
+            background-color: var(--blue-700);
+            color: #fff;
+        }
+    }
+}
