@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -9,6 +9,11 @@ import routes from "./routes";
 
 const Wrapper = () => {
 	AOS.init();
+	const { isAuthenticated, verifyUser } = useContext(GlobalContext);
+
+	useEffect(() => {
+		if (isAuthenticated) verifyUser();
+	}, []);
 	return (
 		<>
 			<Routes>

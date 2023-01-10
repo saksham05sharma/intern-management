@@ -16,7 +16,11 @@ export const copy = (text) => navigator.clipboard.writeText(text);
 
 // The function to omit a particluar key from an object
 
-export const omit = (key, { [key]: _, ...rest }) => rest;
+// export const omit = (key, { [key]: _, ...rest }) => rest;
+export const omit = (obj, key) => {
+	const { [key]: _, ...rest } = obj;
+	return rest;
+};
 
 // The function to produce random numbers between a range
 

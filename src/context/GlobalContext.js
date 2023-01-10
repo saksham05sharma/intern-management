@@ -1,12 +1,21 @@
 import { createContext } from "react";
 
 const GlobalContext = createContext({
-	breakpoint: () => {},
+	breakpoint: () => { },
 	isLoading: "",
-	setIsLoading: () => {},
+	setIsLoading: () => { },
 	isAuthenticated: "",
-	setIsAuthenticated: () => {},
+	setIsAuthenticated: () => { },
 	axiosInstance: undefined,
+	useQuery: () => { },
+	query: undefined,
+	getQuery: () => { },
+	user: undefined,
+	updateUser: () => { },
+	token: undefined,
+	setToken: () => { },
+	synchronize: () => { },
+	verifyUser: () => { },
 });
 
 export default GlobalContext;

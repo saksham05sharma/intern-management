@@ -1,3 +1,5 @@
 import logo from "./logo.svg";
 
-export { logo };
+import team from "./team.svg";
+
+export { logo, team };

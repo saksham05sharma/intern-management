@@ -2,3 +2,87 @@ button {
     all: unset;
     cursor: pointer;
 }
+
+.btn {
+    padding: 14px 24px;
+    border-radius: 6px;
+    margin: 4px;
+    font-size: 18px;
+    line-height: 120%;
+    transition: all var(--transition-time) ease-in-out;
+
+    background-color: var(--blue-700);
+    color: #fff;
+    border: 1px solid var(--blue-700);
+
+    &:hover {
+        background-color: var(--transparent);
+        color: var(--blue-700);
+    }
+
+    &-fill {
+        background-color: var(--blue-700);
+        color: #fff;
+        border: 1px solid var(--blue-700);
+
+        &:hover {
+            background-color: var(--transparent);
+            color: var(--blue-700);
+        }
+    }
+
+    &-outline {
+        background-color: var(--transparent);
+        color: var(--blue-700);
+        border: 1px solid var(--blue-700);
+
+        &:hover {
+            background-color: var(--blue-700);
+            color: #fff;
+        }
+    }
+
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid var(--blue);
+    background-color: var(--blue);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease-in-out;
+
+    &-sm {
+        padding: 6px 10px;
+        font-size: 15px;
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+        object-fit: cover;
+        margin-right: 8px;
+    }
+
+    &:hover {
+        background-color: var(--blue);
+        color: #fff;
+        opacity: 0.8;
+    }
+
+    &-outline {
+        background-color: transparent;
+        color: var(--blue);
+
+        &:hover {
+            background-color: var(--blue);
+            color: #fff;
+        }
+    }
+}

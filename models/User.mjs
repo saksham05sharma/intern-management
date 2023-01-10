@@ -16,11 +16,6 @@ const UserSchema = new mongoose.Schema(
 			required: true,
 			unique: true,
 		},
-		username: {
-			type: String,
-			required: true,
-			unique: true,
-		},
 		password: {
 			type: String,
 			required: true,
@@ -34,19 +29,14 @@ const UserSchema = new mongoose.Schema(
 			enum: Object.values(USER_ROLES),
 			default: USER_ROLES.STUDENT,
 		},
-		avatar: {
-			type: String,
-			default:
-				"https://raw.githubusercontent.com/akshatmittal61/mern-template/master/images/user.svg",
-		},
 		phone: {
 			type: String,
 			required: false,
 		},
-		bio: {
-			type: String,
-			required: false,
-		},
+		allowEdit: {
+			type: Boolean,
+			default: false,
+		}
 	},
 	{ timestamps: true }
 );
