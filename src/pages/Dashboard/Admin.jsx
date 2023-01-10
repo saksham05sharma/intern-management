@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import MaterialIcons from "../../components/MaterialIcons";
 import GlobalContext from "../../context/GlobalContext";
 
 const Admin = () => {
@@ -30,6 +31,34 @@ const Admin = () => {
         }
     };
 
+    const swapUserRole = async (id) => {
+        try {
+            const { data } = await axiosInstance.put(`/admin/edit-user/${id}`, {
+                role: allUsers.find((user) => user._id === id).role === "user" ? "admin" : "user",
+            });
+            console.info(data);
+            setAllUsers((prev) => prev.map((user) => (user._id === id ? data.user : user)));
+            alert(data.message);
+        } catch (error) {
+            console.error(error);
+            alert(error.response.data.message);
+        }
+    };
+
+    const verifyUser = async (id) => {
+        try {
+            const { data } = await axiosInstance.post(`/admin/user-verification/${id}`, {
+                verified: !allUsers.find((user) => user._id === id).verified,
+            });
+            console.info(data);
+            setAllUsers((prev) => prev.map((user) => (user._id === id ? data.user : user)));
+            alert(data.message);
+        } catch (error) {
+            console.error(error);
+            alert(error.response.data.message);
+        }
+    };
+
     useEffect(() => {
         fetchAllUsers();
     }, []);
@@ -47,6 +76,7 @@ const Admin = () => {
                             <th>Email</th>
                             <th>Phone No.</th>
                             <th>Role</th>
+                            <th>User verified</th>
                             <th>Allow Edit</th>
                         </tr>
                     </thead>
@@ -61,7 +91,25 @@ const Admin = () => {
                                 <td>
                                     <a href={`tel:${user.phone}`}>{user.phone}</a>
                                 </td>
-                                <td>{user.role}</td>
+                                <td>
+                                    <span>{user.role}</span>
+                                    <button onClick={() => swapUserRole(user._id)}>
+                                        <MaterialIcons>
+                                            {user.role === "admin" ? "admin_panel_settings" : "person"}
+                                        </MaterialIcons>
+                                    </button>
+                                </td>
+                                <td>
+                                    <span>{user.verified ? "Yes" : "No"}</span>
+                                    {user.role !== "admin" && <><input
+                                        type="checkbox"
+                                        name="isVerified"
+                                        id="isVerified"
+                                        checked={user.verified}
+                                        onChange={() => verifyUser(user._id)}
+                                    />
+                                        <label htmlFor="isVerified"></label></>}
+                                </td>
                                 <td>
                                     <input
                                         type="checkbox"

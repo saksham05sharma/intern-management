@@ -35,13 +35,19 @@
         padding: 8px 0;
         height: fit-content;
         border: 1px solid #d9d9d9;
+
+        button {
+            all: unset;
+            cursor: pointer;
+            margin-left: auto;
+        }
     }
 
     input[type="checkbox"] {
         all: unset;
 
         &+label {
-            display: flex;
+            display: inline-flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;

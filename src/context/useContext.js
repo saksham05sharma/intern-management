@@ -40,6 +40,24 @@ export const useContextData = () => {
 		},
 	});
 
+	const verifyUser = async () => {
+		try {
+			setIsLoading(true);
+			const res = await axiosInstance.get("/auth");
+			setUser(res.data.user);
+			localStorage.setItem("user", JSON.stringify(res.data.user));
+			setIsLoading(false);
+		} catch (error) {
+			setIsLoading(false);
+			localStorage.removeItem("token");
+			localStorage.removeItem("user");
+			localStorage.setItem("isAuthenticated", false);
+			setUser(null);
+			setIsAuthenticated(false);
+		}
+	};
+
+
 	// Hook for using query params
 	const useQuery = () => new URLSearchParams(location.search);
 	const query = useQuery();
@@ -47,7 +65,7 @@ export const useContextData = () => {
 
 	const formatURL = (url) => {
 		// check for any query params and append them in the url
-		
+
 		if (query.get("redirect")) {
 			return `${url}?redirect=${query.get("redirect")}`;
 		} else {
@@ -86,5 +104,6 @@ export const useContextData = () => {
 		token,
 		setToken,
 		synchronize,
+		verifyUser,
 	};
 };

@@ -15,6 +15,7 @@ const GlobalContext = createContext({
 	token: undefined,
 	setToken: () => { },
 	synchronize: () => { },
+	verifyUser: () => { },
 });
 
 export default GlobalContext;

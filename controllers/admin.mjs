@@ -5,7 +5,7 @@ const getAllUsers = async (req, res) => {
         const allUsers = await User.find().select("-password");
         let users = [];
         for (const user of allUsers) {
-            if (user.role !== USER_ROLES.ADMIN || !user.verified) users.push(user);
+            users.push(user);
         }
         return res.status(200).json(users);
     } catch (error) {
@@ -29,7 +29,7 @@ const editUserData = async (req, res) => {
             { ...updatedFields },
             { new: true }
         );
-        return res.status(200).json(updatedUser);
+        return res.status(200).json({ message: "User updated", user: updatedUser });
     } catch (error) {
         console.error(error);
         if (error.kind === "ObjectId")
@@ -47,9 +47,6 @@ const userVerification = async (req, res) => {
         const { ...updatedFields } = req.body;
 
         if (updatedFields.verified) {
-            if (user.role !== USER_ROLES.ADMIN)
-                return res.status(403).json({ message: "Forbidden" });
-
             const updatedUser = await User.findByIdAndUpdate(
                 id,
                 { verified: true, role: updatedFields.role ? updatedFields.role : USER_ROLES.USER },
@@ -58,9 +55,6 @@ const userVerification = async (req, res) => {
             return res.status(200).json({ message: "User verified", user: updatedUser });
         }
         else {
-            if (user.role !== USER_ROLES.ADMIN)
-                return res.status(403).json({ message: "Forbidden" });
-
             const updatedUser = await User.findByIdAndUpdate(
                 id,
                 { verified: false, role: USER_ROLES.USER },
