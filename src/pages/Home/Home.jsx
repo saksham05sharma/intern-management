@@ -17,7 +17,7 @@ const Home = () => {
 				<div className="home-right__buttons">
 					{
 						isAuthenticated ? (
-							<Button to="/dashboard" text="Dashboard" />
+							<Button link="/dashboard" text="Dashboard" />
 						) : (
 							<>
 								<Button text="Login as Intern" link="/login?role=intern" variant='outline' />

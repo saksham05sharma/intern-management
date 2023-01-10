@@ -2,6 +2,7 @@ import { jwtSecret } from "../config/index.mjs";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import User, { USER_ROLES } from "../models/User.mjs";
+import { omit } from "../helpers/index.mjs";
 
 const register = async (req, res) => {
 	const { name, email, phone, password, role } = req.body;
@@ -58,7 +59,11 @@ const login = async (req, res) => {
 		const payload = { user: { id: user.id } };
 		jwt.sign(payload, jwtSecret, { expiresIn: 3600000 }, (err, token) => {
 			if (err) throw err;
-			res.status(200).json({ token });
+			return res.status(200).json({
+				token,
+				user: omit(user, "password"),
+				message: "Login successful",
+			});
 		});
 	} catch (err) {
 		console.error(err.message);

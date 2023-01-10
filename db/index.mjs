@@ -9,6 +9,7 @@ const connect = async () => {
 		})
 		.catch((err) => {
 			console.error(err.message);
+			// eslint-disable-next-line no-undef
 			process.exit(1); // If the MongoDB connection is not made, stop the server
 		});
 };

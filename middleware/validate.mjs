@@ -1,4 +1,4 @@
-const validateEamil = (req, res, next) => {
+const validateEmail = (req, res, next) => {
 	try {
 		const { email } = req.body;
 		if (!email)
@@ -44,4 +44,4 @@ const validatePhone = (req, res, next) => {
 	}
 };
 
-export { validateEamil, validatePassword, validatePhone };
+export { validateEmail, validatePassword, validatePhone };

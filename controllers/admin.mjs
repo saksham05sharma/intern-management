@@ -79,21 +79,23 @@ const userVerification = async (req, res) => {
 const allowUserToEdit = async (req, res) => {
     try {
         const { id } = req.params;
+        const { ...updatedFields } = req.body;
+
         const user = await User.findById(id);
         if (!user) return res.status(404).json({ message: "User not found" });
-
-        if (user.role !== USER_ROLES.ADMIN)
-            return res.status(403).json({ message: "Forbidden" });
-
-        if (user.allowEdit)
+        console.log(updatedFields);
+        if (user.allowEdit && updatedFields.allowEdit)
             return res.status(400).json({ message: "User already allowed to edit" });
+
+        if (!user.allowEdit && !updatedFields.allowEdit)
+            return res.status(400).json({ message: "User already not allowed to edit" });
 
         const updatedUser = await User.findByIdAndUpdate(
             id,
-            { allowEdit: true },
+            { allowEdit: updatedFields.allowEdit !== undefined && updatedFields.allowEdit !== null ? updatedFields.allowEdit : true },
             { new: true }
         );
-        return res.status(200).json(updatedUser);
+        return res.status(200).json({ message: updatedUser.allowEdit ? "User allowed to edit" : "User Edit permission revoked", user: updatedUser });
     } catch (error) {
         console.error(error);
         if (error.kind === "ObjectId")
